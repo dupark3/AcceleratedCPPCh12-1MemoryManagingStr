@@ -4,11 +4,14 @@
 #include <memory>
 #include "Str.h"
 
+// Supports the default constructor
 void Str::create(){
     data = last = limit = 0;
     arraySize = 0;
 }
 
+// Supports the constructor that takes a size and a char
+// If no char provided, value initialized default argument for char
 void Str::create(size_t n, const char& c){
     arraySize = n;
     data = alloc.allocate(arraySize);
@@ -16,6 +19,7 @@ void Str::create(size_t n, const char& c){
     std::uninitialized_fill(data, last, c);
 }
 
+// Supports the constructor that takes a string literal
 void Str::create(const char* cp){
     arraySize = std::strlen(cp);
     data = alloc.allocate(arraySize);
@@ -23,6 +27,7 @@ void Str::create(const char* cp){
     std::uninitialized_copy(cp, cp + arraySize, data);
 }
 
+// Supports the destructor
 void Str::uncreate(){
     if (data){
         clear();
@@ -31,6 +36,7 @@ void Str::uncreate(){
     data = last = limit = 0;
 }
 
+// Supports the uncreate() and operator>> function by deconstructing all existing elements
 void Str::clear(){
     if (data){
         char* it = last;
@@ -40,6 +46,7 @@ void Str::clear(){
     last = data;
 }
 
+// Overloaded append functions to take a character, string literal, or class object
 void Str::append(const char& c){
     if (last == limit)
         grow();
@@ -47,17 +54,16 @@ void Str::append(const char& c){
 }
 
 void Str::append(const char* c){
-    for (size_t i = 0; i != std::strlen(c); ++i)
-        append(c);
+    for (size_t i = 0; i != sizeof c; ++i)
+        append(*(c + i));
 }
-
-
 
 void Str::append(const Str& s){
     for (size_t i = 0; i != s.size(); ++i)
-        append(s.data + i);
+        append(*(s.data + i));
 }
 
+// Supports the append function
 void Str::grow(){
     size_t new_size = std::max(2 * (limit - data), ptrdiff_t(1));
     char* new_data = alloc.allocate(new_size);
@@ -68,30 +74,29 @@ void Str::grow(){
     limit = data + new_size;
 }
 
+// Supports the append function. Only called with enough memory already allocated
 void Str::unchecked_append(const char& c){
     alloc.construct(last++, c);
     ++arraySize;
 }
 
-// OUTPUT NONMEMBER FUNCTION
+// Output nonmember function
 std::ostream& operator<<(std::ostream& os, const Str& s){
     for(Str::size_type i = 0; i != s.size(); ++i)
         os << s[i];
     return os;
 }
 
-
-// INPUT FRIEND FUNCTION (gains access to private member data for writing)
+// Input friend function (gains access to private member data for writing)
 std::istream& operator>>(std::istream& is, Str& s){
-    // obliterate existing values
     s.clear();
 
-    // read nad discard leading whitespace
+    // read and discard all leading whitespace
     char c;
     while (is.get(c) && isspace(c))
-        ; // nothing to do, just test the condition
+        ;
 
-    // if something still to read, do so until next whitespace character
+    // if something still to read, read and append each char until next whitespace character
     if (is){
         do s.append(c);
         while(is.get(c) && !isspace(c));
@@ -105,7 +110,7 @@ std::istream& operator>>(std::istream& is, Str& s){
 }
 
 
-// CONCATENATE NONMEMBER FUNCTION
+// Concatenate nonmember operator overload function
 Str& operator+ (const Str& first, const Str& second){
     Str ret = first;
     ret += second;

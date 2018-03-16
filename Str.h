@@ -25,10 +25,7 @@ typedef size_t size_type;
     const char& operator[](size_t i) const { return data[i]; }
     friend std::istream& operator>>(std::istream&, Str&);
     Str& operator+=(const Str& rvalue) {
-        char* temp = alloc.allocate(arraySize + rvalue.size());
-        std::copy(data, data + arraySize, temp);
-        data = temp;
-        std::copy(rvalue.begin(), rvalue.end(), data + arraySize);
+        append(rvalue);
         return *this;
     }
 
@@ -62,16 +59,19 @@ private:
     void unchecked_append(const char&);
 };
 
+// Supports the constructor that takes two iterators
+// Defined in the header due to template linker error issues
 template <class In>
 void Str::create (In b, In e){
-    data = alloc.allocate(e - b);
+    arraySize = e - b;
+    data = alloc.allocate(arraySize);
     last = limit = std::copy(b, e, data);
 }
 
-// OUTPUT NONMEMBER FUNCTION
+// Output nonmember function declaration
 std::ostream& operator<<(std::ostream&, const Str&);
 
-// CONCATENATE NONMEMBER FUNCTION
+// Concatenate nonmember function operator overload declaration
 Str& operator+ (const Str&, const Str& );
 
 #endif // GUARD_Str_h
