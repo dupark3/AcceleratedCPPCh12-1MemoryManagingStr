@@ -1,5 +1,5 @@
 
-
+#include <cstring> // str_len
 #include <iostream>
 #include <memory>
 #include "Str.h"
@@ -31,7 +31,7 @@ void Str::uncreate(){
     data = last = limit = 0;
 }
 
-void clear(){
+void Str::clear(){
     if (data){
         char* it = last;
         while (it != data)
@@ -40,24 +40,37 @@ void clear(){
     last = data;
 }
 
-void append(const char& c){
+void Str::append(const char& c){
     if (last == limit)
         grow();
     unchecked_append(c);
 }
 
-void grow(){
+void Str::append(const char* c){
+    for (size_t i = 0; i != std::strlen(c); ++i)
+        append(c);
+}
+
+
+
+void Str::append(const Str& s){
+    for (size_t i = 0; i != s.size(); ++i)
+        append(s.data + i);
+}
+
+void Str::grow(){
     size_t new_size = std::max(2 * (limit - data), ptrdiff_t(1));
     char* new_data = alloc.allocate(new_size);
-    char* new_last = uninitialized_copy(data, last, new_data);
+    char* new_last = std::uninitialized_copy(data, last, new_data);
     uncreate();
     data = new_data;
     last = new_last;
     limit = data + new_size;
 }
 
-void unchecked_append(const char& c){
+void Str::unchecked_append(const char& c){
     alloc.construct(last++, c);
+    ++arraySize;
 }
 
 // OUTPUT NONMEMBER FUNCTION
@@ -80,10 +93,8 @@ std::istream& operator>>(std::istream& is, Str& s){
 
     // if something still to read, do so until next whitespace character
     if (is){
-        for (size_t i = 0; i != )
-        do {
-            data =
-        } while(is.get(c) && !isspace(c));
+        do s.append(c);
+        while(is.get(c) && !isspace(c));
 
         // if we read whitspace, then put it back on the stream
         if (is)

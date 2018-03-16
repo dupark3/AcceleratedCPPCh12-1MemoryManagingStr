@@ -13,14 +13,12 @@ class Str{
 public:
 typedef size_t size_type;
 
-    // CONSTRUCTORS
+    // CONSTRUCTORS AND DESTRUCTOR
     Str() { create(); }
     explicit Str(size_t n, const char& c = char()) { create(n, c); }
     Str(const char* cp) { create(cp); }
-    template <class In> Str(In b, In e) {
-        std::copy(b, e, std::back_inserter(data));
-    }
-    ~Str() { uncreate() }
+    template <class In> Str(In b, In e) { create(b, e); }
+    ~Str() { uncreate(); }
 
     // OPERATOR OVERLOADS
     char& operator[](size_t i) { return data[i]; }
@@ -35,18 +33,18 @@ typedef size_t size_type;
     }
 
     // MEMBER FUNCTIONS
-    size_t size() { return size(); }
-    const size_t size() const { return size(); }
+    size_t size() { return arraySize; }
+    const size_t size() const { return arraySize; }
     char* begin() { return data; }
     const char* begin() const { return data; }
-    char* end() { return data + arraySize; }
-    const char* end() const { return data + arraySize; }
+    char* end() { return last; }
+    const char* end() const { return last; }
 
     void clear();
 
+    void append(const char*);
+    void append(const Str&);
     void append(const char&);
-
-    }
 
 private:
     char* data;
@@ -58,10 +56,17 @@ private:
     void create();
     void create(size_t, const char&);
     void create(const char*);
+    template <class In> void create(In, In);
     void uncreate();
     void grow();
-    void unchecked_appened(const char&);
+    void unchecked_append(const char&);
 };
+
+template <class In>
+void Str::create (In b, In e){
+    data = alloc.allocate(e - b);
+    last = limit = std::copy(b, e, data);
+}
 
 // OUTPUT NONMEMBER FUNCTION
 std::ostream& operator<<(std::ostream&, const Str&);
