@@ -1,7 +1,5 @@
-
 #include <cstring> // str_len
-#include <iostream>
-#include <memory>
+
 #include "Str.h"
 
 // Supports the default constructor
@@ -80,6 +78,29 @@ void Str::unchecked_append(const char& c){
     ++arraySize;
 }
 
+// Returns a null-terminated string
+char* Str::c_str(){
+    // Allocate new memory for deep copy
+    char* ret = new char[last - data];
+
+    // Set one past the last element as NULL
+    *last = '\0';
+
+    // Copy into newly allocated char array, including the NULL element at "last"
+    std::copy(data, last + 1, ret);
+
+    return ret;
+}
+
+
+
+
+
+
+            /*********************
+             NON MEMBER FUNCTIONS
+             ********************/
+
 // Output nonmember function
 std::ostream& operator<<(std::ostream& os, const Str& s){
     for(Str::size_type i = 0; i != s.size(); ++i)
@@ -116,5 +137,3 @@ Str& operator+ (const Str& first, const Str& second){
     ret += second;
     return ret;
 }
-
-

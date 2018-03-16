@@ -3,11 +3,8 @@
 
 #include <algorithm> // copy
 #include <cstddef> // size_t
-#include <cstring> // strlen
-#include <iostream>
-#include <iterator> // back_inserter
+#include <iostream> // istream, ostream
 #include <memory> // allocator
-
 
 class Str{
 public:
@@ -32,6 +29,7 @@ typedef size_t size_type;
     // MEMBER FUNCTIONS
     size_t size() { return arraySize; }
     const size_t size() const { return arraySize; }
+
     char* begin() { return data; }
     const char* begin() const { return data; }
     char* end() { return last; }
@@ -42,6 +40,10 @@ typedef size_t size_type;
     void append(const char*);
     void append(const Str&);
     void append(const char&);
+
+    char* c_str();
+    // const char* c_str(const Str&) const;
+
 
 private:
     char* data;
