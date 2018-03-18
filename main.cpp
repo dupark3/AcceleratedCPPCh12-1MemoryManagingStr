@@ -26,25 +26,31 @@ int main()
     nullTermCharArrayStr.append('!');
     iteratorStr += defaultStr;
 
+    std::cout << "Default constructed then append called: " << std::endl;
     for (size_t i = 0; i != defaultStr.size(); ++i)
         std::cout << defaultStr[i];
-    std::cout << std::endl;
 
+    std::cout << std::endl << "Size and value constructed: " << std::endl;
     for (size_t i = 0; i != argStr.size(); ++i)
         std::cout << argStr[i];
-    std::cout << std::endl;
 
+    std::cout << std::endl << "String literal constructed: " << std::endl;
     for (size_t i = 0; i != nullTermCharArrayStr.size(); ++i)
         std::cout << nullTermCharArrayStr[i];
-    std::cout << std::endl;
 
+    std::cout << std::endl << "Begin and End iterator constructed: " << std::endl;
     for (size_t i = 0; i != iteratorStr.size(); ++i)
        std::cout << iteratorStr[i];
-    std::cout << std::endl;
 
+    std::cout << std::endl << "c_str function called to create null-terminated array of char: " << std::endl;
     char* nullTerminated = argStr.c_str();
     for (size_t i = 0; i != std::strlen(nullTerminated); ++i)
         std::cout << nullTerminated[i];
-    std::cout << std::endl;
+
+    std::cout << std::endl << "data function called to create array of char (no null terminator): " << std::endl;
+    char* data = argStr.dataFunction();
+    for (size_t i = 0; i != argStr.size(); ++i)
+        std::cout << data[i];
+
 
 }
