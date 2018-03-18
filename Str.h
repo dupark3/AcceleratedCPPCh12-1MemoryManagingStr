@@ -42,7 +42,7 @@ typedef size_t size_type;
     void append(const char&);
 
     char* c_str();
-    // const char* c_str(const Str&) const;
+    char* dataFunction();
 
 
 private:

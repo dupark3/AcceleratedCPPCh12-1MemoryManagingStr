@@ -92,7 +92,11 @@ char* Str::c_str(){
     return ret;
 }
 
-
+char* Str::dataFunction(){
+    char* ret = new char[last - data];
+    std::copy(data, last, ret);
+    return ret;
+}
 
 
 
