@@ -47,6 +47,8 @@ typedef size_t size_type;
 
     bool operator< (const Str&) const;
     bool operator> (const Str&) const;
+    bool operator== (const Str&) const;
+    bool operator!= (const Str&) const;
 
 
 private:

@@ -125,6 +125,21 @@ bool Str::operator> (const Str& rhs) const{
         return false;
 }
 
+bool Str::operator== (const Str& rhs) const{
+    if(strcmp(c_str(), rhs.c_str()) == 0)
+        return true;
+    else
+        return false;
+}
+
+bool Str::operator!= (const Str& rhs) const{
+    if(strcmp(c_str(), rhs.c_str()) != 0)
+        return true;
+    else
+        return false;
+}
+
+
             /*********************
              NON MEMBER FUNCTIONS
              ********************/
