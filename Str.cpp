@@ -1,4 +1,4 @@
-#include <cstring> // str_len
+#include <cstring> // str_len, strcmp
 
 #include "Str.h"
 
@@ -79,7 +79,7 @@ void Str::unchecked_append(const char& c){
 }
 
 // Returns a pointer to a null-terminated array of chars
-char* Str::c_str(){
+char* Str::c_str() const{
     // Allocate new memory for deep copy
     char* ret = new char[last - data];
 
@@ -110,7 +110,20 @@ size_t Str::copy(char* destination, size_t numberToCopy) const{
     return numberCopied;
 }
 
+bool Str::operator< (const Str& rhs) const{
+    // strcmp returns a negative if first param is less than second param
+    if(strcmp(c_str(), rhs.c_str()) < 0)
+        return true;
+    else
+        return false;
+}
 
+bool Str::operator> (const Str& rhs) const{
+    if(strcmp(c_str(), rhs.c_str()) > 0)
+        return true;
+    else
+        return false;
+}
 
             /*********************
              NON MEMBER FUNCTIONS

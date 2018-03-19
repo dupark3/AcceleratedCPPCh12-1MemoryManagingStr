@@ -41,9 +41,12 @@ typedef size_t size_type;
     void append(const Str&);
     void append(const char&);
 
-    char* c_str();
+    char* c_str() const;
     char* dataFunction();
     size_t copy(char*, size_t) const;
+
+    bool operator< (const Str&) const;
+    bool operator> (const Str&) const;
 
 
 private:
