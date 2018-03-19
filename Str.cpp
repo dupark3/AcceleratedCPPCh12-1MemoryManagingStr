@@ -152,7 +152,7 @@ Str& operator+ (const Str& first, const Str& second){
 }
 
 
-bool Str::operator< (const Str& lhs, const Str& rhs) const{
+bool operator< (const Str& lhs, const Str& rhs){
     // strcmp returns a negative if first param is less than second param
     if(strcmp(lhs.c_str(), rhs.c_str()) < 0)
         return true;
@@ -160,21 +160,21 @@ bool Str::operator< (const Str& lhs, const Str& rhs) const{
         return false;
 }
 
-bool Str::operator> (const Str& lhs, const Str& rhs) const{
+bool operator> (const Str& lhs, const Str& rhs){
     if(strcmp(lhs.c_str(), rhs.c_str()) > 0)
         return true;
     else
         return false;
 }
 
-bool Str::operator== (const Str& lhs, const Str& rhs) const{
+bool operator== (const Str& lhs, const Str& rhs){
     if(strcmp(lhs.c_str(), rhs.c_str()) == 0)
         return true;
     else
         return false;
 }
 
-bool Str::operator!= (const Str& lhs, const Str& rhs) const{
+bool operator!= (const Str& lhs, const Str& rhs){
     if(strcmp(lhs.c_str(), rhs.c_str()) != 0)
         return true;
     else

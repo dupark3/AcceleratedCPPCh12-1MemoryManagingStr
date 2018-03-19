@@ -83,9 +83,9 @@ std::ostream& operator<<(std::ostream&, const Str&);
 Str& operator+ (const Str&, const Str& );
 
 // Relational, equality, inequality operators
-bool operator< (const Str&, const Str&) const;
-bool operator> (const Str&, const Str&) const;
-bool operator== (const Str&, const Str&) const;
-bool operator!= (const Str&, const Str&) const;
+bool operator< (const Str&, const Str&);
+bool operator> (const Str&, const Str&);
+bool operator== (const Str&, const Str&);
+bool operator!= (const Str&, const Str&);
 
 #endif // GUARD_Str_h
