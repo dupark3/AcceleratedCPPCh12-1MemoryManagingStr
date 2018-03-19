@@ -30,7 +30,7 @@ int main()
     for (size_t i = 0; i != defaultStr.size(); ++i)
         std::cout << defaultStr[i];
 
-    std::cout << std::endl << "Size and value constructed: " << std::endl;
+    std::cout << std::endl << "Argument constructed using Size and Value: " << std::endl;
     for (size_t i = 0; i != argStr.size(); ++i)
         std::cout << argStr[i];
 
@@ -59,5 +59,17 @@ int main()
         std::cout << *(substring + i);
     delete[] substring;
 
-    std::cout << std::endl;
+    std::cout << std::endl << "Default < argument constructed? " << std::endl;
+    if (defaultStr < argStr)
+        std::cout << "Yes";
+    else
+        std::cout << "No";
+
+    std::cout << std::endl << "Default > argument constructed? " << std::endl;
+    if (defaultStr > argStr)
+        std::cout << "Yes";
+    else
+        std::cout << "No";
+
+    return 0;
 }
