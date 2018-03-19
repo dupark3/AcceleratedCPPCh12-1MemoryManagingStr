@@ -26,6 +26,8 @@ int main()
     nullTermCharArrayStr.append('!');
     iteratorStr += defaultStr;
 
+    // EXERCISE 12-0 STR CLASS
+    std::cout << "EXERCISE 12-0 STR CLASS" << std::endl;
     std::cout << "Default constructed then append called: " << std::endl;
     for (size_t i = 0; i != defaultStr.size(); ++i)
         std::cout << defaultStr[i];
@@ -42,7 +44,10 @@ int main()
     for (size_t i = 0; i != iteratorStr.size(); ++i)
        std::cout << iteratorStr[i];
 
-    std::cout << std::endl << "c_str function called to create null-terminated array of char: " << std::endl;
+
+    // EXERCISE 12-1 C_STR, DATA, COPY
+    std::cout << std::endl << std::endl << "EXERCISE 12-1 C_STR, DATA, COPY FUNCTIONS" << std::endl;
+    std::cout << "c_str function called to create null-terminated array of char: " << std::endl;
     char* nullTerminated = argStr.c_str();
     for (size_t i = 0; i != std::strlen(nullTerminated); ++i)
         std::cout << nullTerminated[i];
@@ -59,7 +64,10 @@ int main()
         std::cout << *(substring + i);
     delete[] substring;
 
-    std::cout << std::endl << "Default < argument constructed? " << std::endl;
+
+    // EXERCISE 12-2 AND 12-3 RELATIONAL AND EQUALITY OPERATORS
+    std::cout << std::endl << std::endl << "EXERCISE 12-2 AND 12-3 RELATIONAL AND EQUALITY OPERATORS" << std::endl;
+    std::cout << "Default < argument constructed? " << std::endl;
     if (defaultStr < argStr)
         std::cout << "Yes";
     else
@@ -70,6 +78,19 @@ int main()
         std::cout << "Yes";
     else
         std::cout << "No";
+
+    std::cout << std::endl << "Default == argument constructed? " << std::endl;
+    if (defaultStr == argStr)
+        std::cout << "Yes";
+    else
+        std::cout << "No";
+
+    std::cout << std::endl << "Default != argument constructed? " << std::endl;
+    if (defaultStr != argStr)
+        std::cout << "Yes";
+    else
+        std::cout << "No";
+
 
     return 0;
 }
