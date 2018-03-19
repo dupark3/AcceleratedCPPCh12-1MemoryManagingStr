@@ -43,6 +43,7 @@ typedef size_t size_type;
 
     char* c_str();
     char* dataFunction();
+    size_t copy(char*, size_t) const;
 
 
 private:

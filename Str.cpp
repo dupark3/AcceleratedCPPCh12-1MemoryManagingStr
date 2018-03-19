@@ -78,7 +78,7 @@ void Str::unchecked_append(const char& c){
     ++arraySize;
 }
 
-// Returns a null-terminated string
+// Returns a pointer to a null-terminated array of chars
 char* Str::c_str(){
     // Allocate new memory for deep copy
     char* ret = new char[last - data];
@@ -92,12 +92,23 @@ char* Str::c_str(){
     return ret;
 }
 
+// Returns a pointer to a non-null terminated array of chars
 char* Str::dataFunction(){
     char* ret = new char[last - data];
     std::copy(data, last, ret);
     return ret;
 }
 
+size_t Str::copy(char* destination, size_t numberToCopy) const{
+    size_t numberCopied;
+
+    for (size_t i = 0; i != numberToCopy && i != arraySize; ++i){
+        *destination++ = *(data + i);
+        ++numberCopied;
+    }
+
+    return numberCopied;
+}
 
 
 

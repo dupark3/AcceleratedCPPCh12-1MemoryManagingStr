@@ -52,5 +52,11 @@ int main()
     for (size_t i = 0; i != argStr.size(); ++i)
         std::cout << data[i];
 
+    std::cout << std::endl << "Substring copy function, copying 3 elements from default: " << std::endl;
+    char* substring = new char[3];
+    defaultStr.copy(substring, 3);
+    for (size_t i = 0; i != 3; ++i)
+        std::cout << *(substring + i);
 
+    std::cout << std::endl;
 }
