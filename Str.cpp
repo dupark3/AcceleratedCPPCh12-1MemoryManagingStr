@@ -110,36 +110,6 @@ size_t Str::copy(char* destination, size_t numberToCopy) const{
     return numberCopied;
 }
 
-bool Str::operator< (const Str& rhs) const{
-    // strcmp returns a negative if first param is less than second param
-    if(strcmp(c_str(), rhs.c_str()) < 0)
-        return true;
-    else
-        return false;
-}
-
-bool Str::operator> (const Str& rhs) const{
-    if(strcmp(c_str(), rhs.c_str()) > 0)
-        return true;
-    else
-        return false;
-}
-
-bool Str::operator== (const Str& rhs) const{
-    if(strcmp(c_str(), rhs.c_str()) == 0)
-        return true;
-    else
-        return false;
-}
-
-bool Str::operator!= (const Str& rhs) const{
-    if(strcmp(c_str(), rhs.c_str()) != 0)
-        return true;
-    else
-        return false;
-}
-
-
             /*********************
              NON MEMBER FUNCTIONS
              ********************/
@@ -179,4 +149,34 @@ Str& operator+ (const Str& first, const Str& second){
     Str ret = first;
     ret += second;
     return ret;
+}
+
+
+bool Str::operator< (const Str& lhs, const Str& rhs) const{
+    // strcmp returns a negative if first param is less than second param
+    if(strcmp(lhs.c_str(), rhs.c_str()) < 0)
+        return true;
+    else
+        return false;
+}
+
+bool Str::operator> (const Str& lhs, const Str& rhs) const{
+    if(strcmp(lhs.c_str(), rhs.c_str()) > 0)
+        return true;
+    else
+        return false;
+}
+
+bool Str::operator== (const Str& lhs, const Str& rhs) const{
+    if(strcmp(lhs.c_str(), rhs.c_str()) == 0)
+        return true;
+    else
+        return false;
+}
+
+bool Str::operator!= (const Str& lhs, const Str& rhs) const{
+    if(strcmp(lhs.c_str(), rhs.c_str()) != 0)
+        return true;
+    else
+        return false;
 }

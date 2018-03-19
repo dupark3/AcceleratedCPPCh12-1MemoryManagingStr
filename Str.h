@@ -45,10 +45,6 @@ typedef size_t size_type;
     char* dataFunction();
     size_t copy(char*, size_t) const;
 
-    bool operator< (const Str&) const;
-    bool operator> (const Str&) const;
-    bool operator== (const Str&) const;
-    bool operator!= (const Str&) const;
 
 
 private:
@@ -76,10 +72,20 @@ void Str::create (In b, In e){
     last = limit = std::copy(b, e, data);
 }
 
+            /*********************
+             NON MEMBER FUNCTIONS
+             ********************/
+
 // Output nonmember function declaration
 std::ostream& operator<<(std::ostream&, const Str&);
 
 // Concatenate nonmember function operator overload declaration
 Str& operator+ (const Str&, const Str& );
+
+// Relational, equality, inequality operators
+bool operator< (const Str&, const Str&) const;
+bool operator> (const Str&, const Str&) const;
+bool operator== (const Str&, const Str&) const;
+bool operator!= (const Str&, const Str&) const;
 
 #endif // GUARD_Str_h
