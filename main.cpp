@@ -57,6 +57,7 @@ int main()
     defaultStr.copy(substring, 3);
     for (size_t i = 0; i != 3; ++i)
         std::cout << *(substring + i);
+    delete[] substring;
 
     std::cout << std::endl;
 }
