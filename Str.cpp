@@ -1,4 +1,6 @@
+#include <algorithm> // copy
 #include <cstring> // str_len, strcmp
+#include <iterator> // ostream_iterator
 
 #include "Str.h"
 
@@ -113,7 +115,7 @@ size_t Str::copy(char* destination, size_t numberToCopy) const{
 std::istream& Str::getline(std::istream& inputStream){
     if(inputStream){
         clear();
-        
+
         char c;
         while (inputStream.get(c))
             append(c);
@@ -134,10 +136,9 @@ Str::operator const void*() const{
              NON MEMBER FUNCTIONS
              ********************/
 
-// Output nonmember function
+// Output nonmember operator function using ostream_iterator
 std::ostream& operator<<(std::ostream& os, const Str& s){
-    for(Str::size_type i = 0; i != s.size(); ++i)
-        os << s[i];
+    std::copy(s.begin(), s.end(), std::ostream_iterator<char>(os, "\n"));
     return os;
 }
 
