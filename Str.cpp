@@ -110,6 +110,15 @@ size_t Str::copy(char* destination, size_t numberToCopy) const{
     return numberCopied;
 }
 
+Str::operator void*() const{
+    void* ret;
+    if (arraySize == 0)
+        *ret = 1;
+    else
+        *ret = 0;
+    return ret;
+}
+
             /*********************
              NON MEMBER FUNCTIONS
              ********************/
@@ -152,31 +161,20 @@ Str& operator+ (const Str& first, const Str& second){
 }
 
 
+// Relational and equality operators as friend nonmembers
+// strcmp returns a negative if lhs < rhs, zero if lhs == rhs, and positive if lhs < rhs
 bool operator< (const Str& lhs, const Str& rhs){
-    // strcmp returns a negative if first param is less than second param
-    if(strcmp(lhs.c_str(), rhs.c_str()) < 0)
-        return true;
-    else
-        return false;
+    return strcmp(lhs.c_str(), rhs.c_str()) < 0;
 }
 
 bool operator> (const Str& lhs, const Str& rhs){
-    if(strcmp(lhs.c_str(), rhs.c_str()) > 0)
-        return true;
-    else
-        return false;
+    return strcmp(lhs.c_str(), rhs.c_str()) > 0;
 }
 
 bool operator== (const Str& lhs, const Str& rhs){
-    if(strcmp(lhs.c_str(), rhs.c_str()) == 0)
-        return true;
-    else
-        return false;
+    return strcmp(lhs.c_str(), rhs.c_str()) == 0;
 }
 
 bool operator!= (const Str& lhs, const Str& rhs){
-    if(strcmp(lhs.c_str(), rhs.c_str()) != 0)
-        return true;
-    else
-        return false;
+    return strcmp(lhs.c_str(), rhs.c_str()) != 0;
 }
