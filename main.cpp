@@ -30,6 +30,9 @@ Add iterators and the iterator operations begin and end to your Str class,
 similar to how the string class provides random access iterators to manipulate
 the string's characters. */
 
+/* Accelerated C++ Exercise 12-8
+Add the getline function to the Str class */
+
 #include <cstring> // strlen
 #include <iostream>
 
@@ -119,6 +122,15 @@ int main()
         std::cout << "No";
     else
         std::cout << "Yes";
+
+// EXERCISE 12-7 GETLINE FUNCTION
+    std::cout << std::endl << std::endl << "EXERCISE 12-7 GETLINE FUNCTION" << std::endl;
+    std::cout << "Input line to store in getlineStr: ";
+    Str getlineStr;
+    getlineStr.getline(std::cin);
+    std::cout << "You entered: ";
+    for (size_t i = 0; i != getlineStr.size(); ++i)
+        std::cout << getlineStr[i];
 
 
     return 0;
