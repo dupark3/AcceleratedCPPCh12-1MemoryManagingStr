@@ -110,13 +110,8 @@ size_t Str::copy(char* destination, size_t numberToCopy) const{
     return numberCopied;
 }
 
-Str::operator void*() const{
-    void* ret;
-    if (arraySize == 0)
-        *ret = 1;
-    else
-        *ret = 0;
-    return ret;
+Str::operator const void*() const{
+    return arraySize == 0 ? 0 : this;
 }
 
             /*********************
@@ -151,7 +146,6 @@ std::istream& operator>>(std::istream& is, Str& s){
 
     return is;
 }
-
 
 // Concatenate nonmember operator overload function
 Str& operator+ (const Str& first, const Str& second){

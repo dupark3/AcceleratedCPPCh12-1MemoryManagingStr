@@ -10,6 +10,16 @@ store an array of char and a length. */
 Implement the c_str, data, and copy functions that the string library implements in order to
 convert a string into a null-terminated char array without causing memory management issues */
 
+/* Accelerated C++ Exercise 12-3 and 12-4
+Define the relational, equality, and inequality operators for Str using strcmp */
+
+/* Accelerated C++ Exercise 12-5
+Implement concatenation for Str without relying on conversions from const char* */
+
+/* Accelerated C++ Exercise 12-6
+Give Str an operation that will let us implicitly use a Str object as a condition.
+The test should fail if the Str is empty, and should succeed otherwise. */
+
 #include <cstring> // strlen
 #include <iostream>
 
@@ -18,6 +28,7 @@ convert a string into a null-terminated char array without causing memory manage
 int main()
 {
     Str defaultStr;
+    Str emptyStr;
     Str argStr(4, 'a');
     Str nullTermCharArrayStr("hello");
     Str iteratorStr(argStr.begin(), argStr.end());
@@ -26,7 +37,7 @@ int main()
     nullTermCharArrayStr.append('!');
     iteratorStr += defaultStr;
 
-    // EXERCISE 12-0 STR CLASS
+// EXERCISE 12-1 STR CLASS
     std::cout << "EXERCISE 12-0 STR CLASS" << std::endl;
     std::cout << "Default constructed then append called: " << std::endl;
     for (size_t i = 0; i != defaultStr.size(); ++i)
@@ -45,7 +56,7 @@ int main()
        std::cout << iteratorStr[i];
 
 
-    // EXERCISE 12-1 C_STR, DATA, COPY
+// EXERCISE 12-2 C_STR, DATA, COPY
     std::cout << std::endl << std::endl << "EXERCISE 12-1 C_STR, DATA, COPY FUNCTIONS" << std::endl;
     std::cout << "c_str function called to create null-terminated array of char: " << std::endl;
     char* nullTerminated = argStr.c_str();
@@ -65,7 +76,7 @@ int main()
     delete[] substring;
 
 
-    // EXERCISE 12-2 AND 12-3 RELATIONAL AND EQUALITY OPERATORS
+// EXERCISE 12-3 AND 12-4 RELATIONAL AND EQUALITY OPERATORS
     std::cout << std::endl << std::endl << "EXERCISE 12-2 AND 12-3 RELATIONAL AND EQUALITY OPERATORS" << std::endl;
     std::cout << "Default < argument constructed? " << std::endl;
     if (defaultStr < argStr)
@@ -90,6 +101,14 @@ int main()
         std::cout << "Yes";
     else
         std::cout << "No";
+
+// EXERCISE 12-6 OPERATOR VOID* CONVERSION
+    std::cout << std::endl << std::endl << "EXERCISE 12-6 OPERATOR VOID* CONVERSION" << std::endl;
+    std::cout << "Empty Default constructed Str empty? " << std::endl;
+    if (emptyStr)
+        std::cout << "No";
+    else
+        std::cout << "Yes";
 
 
     return 0;
