@@ -45,7 +45,9 @@ typedef size_t size_type;
     char* dataFunction();
     size_t copy(char*, size_t) const;
 
+    operator const void*() const;
 
+    std::istream& getline(std::istream&);
 
 private:
     char* data;

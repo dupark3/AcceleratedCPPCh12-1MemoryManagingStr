@@ -110,9 +110,25 @@ size_t Str::copy(char* destination, size_t numberToCopy) const{
     return numberCopied;
 }
 
+std::istream& Str::getline(std::istream& inputStream){
+    if(inputStream){
+        clear();
+        
+        char c;
+        while (inputStream.get(c))
+            append(c);
+
+        inputStream.clear();
+    }
+
+    return inputStream;
+}
+
 Str::operator const void*() const{
     return arraySize == 0 ? 0 : this;
 }
+
+
 
             /*********************
              NON MEMBER FUNCTIONS
